@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Header{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/review_list.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="site-title">
+                <a href="{% url 'review_list' %}" class="title_a">
+                    <h1>꽁꽁넷</h1>
+                </a>
+            </div>
+            <div class="header-bottom">
+                <form class="search-form" action="{% url 'search_view' %}" method="get">
+                    <select name="category" class="category-select">
+                        <option value="all" {% if request.GET.category == 'all' %}selected{% endif %}>모든 카테고리</option>
+                        <option value="막대" {% if request.GET.category == '막대' %}selected{% endif %}>막대</option>
+                        <option value="콘" {% if request.GET.category == '콘' %}selected{% endif %}>콘</option>
+                        <option value="패밀리" {% if request.GET.category == '패밀리' %}selected{% endif %}>패밀리</option>
+                        <option value="쭈쭈바" {% if request.GET.category == '쭈쭈바' %}selected{% endif %}>쭈쭈바</option>
+                    </select>
+                    <input type="text" name="search" class="search-input" placeholder="검색어를 입력하세요" value="{{ request.GET.search }}">
+                    <button type="submit" class="search-button">검색</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

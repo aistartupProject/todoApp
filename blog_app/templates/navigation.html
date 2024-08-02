@@ -1,0 +1,15 @@
+<header>
+    <h1>게시판</h1>
+    <nav>
+        <ul class="nav-list">
+            <li><a href="{% url 'posts' %}">홈</a></li>
+            <li><a href="{% url 'new_post' %}">글쓰기</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">로그아웃</a></li>
+            {% else %}
+                <li><a href="{% url 'join' %}">회원가입</a></li>
+                <li><a href="{% url 'login' %}">로그인</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>

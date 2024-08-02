@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시판</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        {% include 'navigation.html' %}
+        <main>
+            <section class="board-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>내용</th>
+                            <th>작성자</th>
+                            <th>날짜</th>
+                            <th>조회수</th>
+                        </tr>
+                    </thead>
+                    <tbody class="post_list">
+                        {% for post in posts %}
+                        <tr>
+                            <td>0</td>
+                            <!-- <td>{{ forloop.counter }}</td> -->
+                            <td><a href="{% url 'read_post' post.id %}">{{ post.title }}</a></td>
+                            <td>{{ post.content|truncatechars:160 }}</td>
+                            <td>{{ post.author }}</td>
+                            <td>{{ post.created_at|date:"Y-m-d" }}</td>
+                            <td>{{ post.views }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if posts.has_previous %}
+                            <a href="?page=1">&laquo; 처음</a>
+                            <a href="?page={{ posts.previous_page_number }}">이전</a>
+                        {% endif %}
+                        <span class="current">
+                            {{ posts.number }} / {{ posts.paginator.num_pages }} 
+                        </span>
+                        {% if posts.has_next %}
+                            <a href="?page={{ posts.next_page_number }}">다음</a>
+                            <a href="?page={{ posts.paginator.num_pages }}">맨 끝 &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </section>   
+        </main>
+        {% include 'footer.html' %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>닉네임 변경</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <main>
+        <form action="{% url 'changeNickname' %}" method="post">
+            {% csrf_token %}
+            <div class="signup-form-group">
+                <label for="username">변경할 닉네임:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <button type="submit">변경</button>
+        </form>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

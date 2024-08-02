@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ item.name }} - Details</title>
+</head>
+<body>
+    <h1>{{ item.name }}</h1>
+    <p>Price: {{ item.price }}</p>
+    <p>Manufacturer: {{ item.manufacturer }}</p>
+    <img src="{% static 'images/' %}{{ item.image }}" alt="{{ item.name }}">
+    <a href="{% url 'review_list' %}">Back to list</a>
+</body>
+</html>
